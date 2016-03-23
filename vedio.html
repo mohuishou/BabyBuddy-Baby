@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="css/base.min.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			
+			#call {
+				position: absolute;
+				bottom: 20%;
+				left: 40%;
+			}
+			
+			.avatar {
+				width: 200px;
+				height: 200px;
+				margin: auto;
+			}
+			
+			#bg {}
+		</style>
+	</head>
+
+	<body>
+		<div style="padding:50px"> </div>
+		<div id="bg">
+			<span class="avatar avatar-lg"><img alt="..." src="img/tx1.jpg"></span>
+		</div>
+
+		<div id="call">
+			<a onclick="call();" class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-light">
+				<span class="icon">call</span>
+			</a>
+		</div>
+
+	</body>
+
+	<script src="js/appcan/appcan.js"></script>
+	<script src="js/appcan/appcan.control.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+	<script src="js/base.min.js"></script>
+
+	<script>
+		function call() {
+			uexESurfingRtc.call(2, "4892",'');
+//			alert(123);
+		}
+	</script>
+
+</html>

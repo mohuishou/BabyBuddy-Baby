@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="css/base.min.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				background: url(img/iconfont-lanya.png) no-repeat 50%;
+			}
+			
+			.header {
+				padding: 0;
+			}
+			
+			#bg{
+				
+			}
+			
+			#footer {
+				position: absolute;
+				bottom: 50px;
+				width: 100%;
+				z-index: 99999 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+
+
+		<div id="footer">
+			<button class="fbtn waves-attach waves-light waves-button fbtn-lg btn fbtn-brand" id="scanData" onclick="listBlue();">扫描</button>
+			<button class="fbtn  waves-attach waves-light waves-button fbtn-lg btn fbtn-brand-accent " id="disconnect" style="display: none;" onclick="disConnect();">断开</button>
+
+		</div>
+
+		<div id="mainFrame" >
+
+		</div>
+		<div aria-hidden="true" class="modal fade" id="deviceList" role="dialog" tabindex="-1">
+			<div class="modal-dialog modal-xs">
+				<div class="modal-content" style="text-align: center;">
+					<div class="modal-heading">
+						<h2 class="modal-title" style="text-align: center;margin: 0;">请选择设备</h2></div>
+					<div class="modal-inner" style="padding: 0;">
+
+					</div>
+					<div class="modal-footer">
+						<a style="font-size:17px;text-align:center;" class="btn btn-flat btn-brand waves-attach waves-button waves-effect" data-dismiss="modal">关闭</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		</div>
+
+	</body>
+
+	<script src="js/appcan/appcan.js"></script>
+	<script src="js/appcan/appcan.control.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+	<script src="js/base.min.js"></script>
+
+	<script>
+		appcan.ready(function() {
+			
+
+			callback();
+			init();
+		});
+
+		
+	
+	</script>
+	<script src="js/bluetooth.js"></script>
+	<script src="js/vedio.js"></script>
+
+</html>

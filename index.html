@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="css/ui-box.css">
+		<link rel="stylesheet" href="css/ui-base.css">
+		<link rel="stylesheet" href="css/ui-color.css">
+		<link rel="stylesheet" href="css/appcan.icon.css">
+		<link rel="stylesheet" href="css/appcan.control.css">
+		<link rel="stylesheet" href="index/css/main.css">
+		<style>
+			h1 {
+				background: #f3f3f3;
+				;
+				color: #333;
+			}
+			
+			.sc-text-active {
+				color: #3f51b5;
+			}
+			
+			#footer {
+				background: #f3f3f3;
+			}
+			
+			#header {
+				border-bottom: 1px solid #f3f3f3;
+			}
+			
+			#vedio {
+				border: 0;
+				text-align: center;
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+			}
+			
+			#vedio div {
+				line-height: 200%;
+			}
+		</style>
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div id="page_0" class="up ub ub-ver" tabindex="0">
+			<!--header开始-->
+			<div id="header" class="uh bc-text-head ub bc-head">
+
+				<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">蓝牙</h1>
+
+			</div>
+			<!--header结束-->
+			<!--content开始-->
+			<div id="content" class="ub-f1 ">
+
+			</div>
+			<!--content结束-->
+
+			
+				<!--footer开始-->
+				<div id="footer" class="uf t-bla ub tab t-wh ubt bc-border">
+
+				</div>
+			</div>
+			<!--footer结束-->
+		</div>
+	</body>
+	<script src="js/appcan/appcan.js"></script>
+	<script src="js/appcan/appcan.control.js"></script>
+	<script src="js/appcan/appcan.tab.js"></script>
+	<!--<script src="js/jquery-2.2.1.min.js"></script>-->
+	<script src="js/vedio.js"></script>
+	</body>
+	<script>
+		
+		appcan.ready(function() {
+			var titHeight = $('#header').offset().height;
+			if (!checkLogin()) return false;
+			appcan.frame.open({ /*创建多浮动窗口*/
+				id: "content",
+				url: [{
+					"inPageName": "main",
+					"inUrl": "main.html",
+				}, {
+					"inPageName": "music",
+					"inUrl": "music.html",
+				}, {
+					"inPageName": "vedio",
+					"inUrl": "vedio.html",
+				}],
+				top: titHeight,
+				left: 0,
+				index: 0,
+				change: function(index, res) { /*浮动窗口推拽变更时回调，可控制tab进行同步变更*/
+					tabview.moveTo(res.multiPopSelectedIndex);
+					switch (res.multiPopSelectedIndex) {
+						case 0:
+							$('h1').text('蓝牙');
+							break;
+						case 1:
+							$('h1').text('音乐');
+							break;
+						case 2:
+							$('h1').text('视频');
+							break;
+					}
+				}
+			});
+			rtcInit();
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, titHeight);
+			}
+		});
+		var tabview = appcan.tab({
+			selector: "#footer",
+			hasIcon: true,
+			hasAnim: false,
+			hasLabel: true,
+			hasBadge: true,
+			index: 0,
+			data: [{
+				label: "蓝牙",
+				icon: "fa-home"
+			}, {
+				label: "音乐",
+				icon: "fa-music",
+			}, {
+				label: "视频",
+				icon: "fa-play",
+			}]
+		});
+		tabview.on("click", function(obj, index) { /*TAB变更时切换多浮动窗口*/
+			appcan.window.selectMultiPopover("content", index);
+			switch (index) {
+				case 0:
+					$('h1').text('蓝牙');
+					break;
+				case 1:
+					$('h1').text('音乐');
+					break;
+				case 2:
+					$('h1').text('视频');
+					break;
+			}
+		})
+		appcan.button(".nav-btn", "btn-act", function() {
+			//appcan.window.close(-1);
+		});
+
+		function checkLogin() {
+			//						appcan.locStorage.remove('token');
+			if (appcan.locStorage.getVal('token')) {
+				return true;
+			} else {
+				alert('尚未登陆，点击确认登陆');
+				openLogin();
+			}
+		}
+
+		function openLogin() {
+			appcan.window.open({
+				name: 'login',
+				dataType: 0,
+				data: 'login.html'
+			});
+		}
+		appcan.button(".btn", "ani-act", function() {})
+	</script>
+
+</html>

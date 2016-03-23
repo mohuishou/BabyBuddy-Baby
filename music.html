@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="css/base.min.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				background: #fcfcfc;
+			}
+			
+			.header {
+				padding: 0;
+			}
+			.header p{
+				margin: 0;
+			}
+			
+			#musicList {
+				margin: 0;
+			}
+			
+			#footer {
+				position: fixed;
+				bottom: 0px;
+				width: 100%;
+				z-index: 99999 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+	
+		
+		<div id="musicList" class="tile-wrap">
+		
+		</div>
+		<footer id="footer">
+			<button class="btn btn-block btn-brand" onclick="fileOpen();">扫描文件</button>
+		</footer>
+
+		<!--<div id="mainFrame">
+			
+		</div>-->
+		
+
+	</body>
+
+	<script src="js/appcan/appcan.js"></script>
+	<script src="js/appcan/appcan.control.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+	<script src="js/base.min.js"></script>
+
+	<script>
+		appcan.ready(function() {
+			uexFileMgr.cbMultiExplorer = fileCb;
+			musicList();
+		});
+	</script>
+	<script src="js/music.js"></script>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        
+        <style type="text/css">
+            .btn{
+                margin-top: 10px;
+            }
+        </style>
+        
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        
+        <div class="tit">
+            uexBluetoothSerial对象
+        </div>
+        <div class="conbor">
+            <div class="consj">
+                <input class="btn" type="button" value="调用listDevices"
+                onclick="test_listDevices();">
+                <br />
+                <input class="btn" type="button" value="调用connect"
+                onclick="test_connect();">
+                <br />
+                <input class="btn" type="button" value="调用connectInsecure"
+                onclick="test_connectInsecure();">
+                <br />
+                <input class="btn" type="button" value="调用EnableReceiveEvent"
+                onclick="test_EnableReceiveEvent();">
+                <br />
+                <input class="btn" type="button" value="调用DisableReceiveEvent"
+                onclick="test_DisableReceiveEvent();">
+                <br />
+                
+                <input class="btn" type="button" value="调用writeString"
+                onclick="test_writeString();">
+                <br />
+                <input class="btn" type="button" value="调用writeHexString"
+                onclick="test_writeHexString();">
+                <br />
+                <input class="btn" type="button" value="调用writeHexJson"
+                onclick="test_writeHexJson();">
+                <br />
+                
+                <input class="btn" type="button" value="调用readBytes"
+                onclick="test_readBytes();">
+                <br />
+                
+                <input class="btn" type="button" value="调用isEnabled"
+                onclick="test_isEnabled();">
+                <br />
+                <input class="btn" type="button" value="调用isConnected"
+                onclick="test_isConnected();">
+                <br />
+                
+                <input class="btn" type="button" value="调用disconnect"
+                onclick="test_disconnect();">
+                <br />
+                
+                <input class="btn" type="button" value="CRC16"
+                onclick="test_CRC16();">
+                <br />
+            </div>
+
+        </div>
+        
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+         <!--<script src="js/lib/utility.js"></script>-->
+    </body>
+    <script>
+        appcan.ready(function() {
+//      	alert(123);
+            appcan.initBounce();
+        });
+        
+    </script>
+    <script type="text/javascript">
+            var devices;
+            // = new Array();
+
+            appcan.ready(function() {
+                  //alert('abc');
+               // if (type == 0) {
+
+                    uexBluetoothSerial.onlistDevicesCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onlistDevicesCallback");
+                        devices = eval("(" + data + ")");
+                    };
+                    uexBluetoothSerial.onConnectCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onConnectCallback");
+                    };
+                    uexBluetoothSerial.onDisConnectCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onDisConnectCallback");
+                    };
+                    uexBluetoothSerial.onWriteCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onWriteCallback");
+                    };
+                    uexBluetoothSerial.onReadCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onReadCallback");
+                    };
+                    uexBluetoothSerial.onIsEnabledCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onIsEnabledCallback");
+                    };
+                    uexBluetoothSerial.onIsConnectedCallback = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onIsConnectedCallback");
+                    };
+
+                    uexBluetoothSerial.onDataSendEvent = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onDataSendEvent");
+                    };
+                    uexBluetoothSerial.onDataReceivedEvent = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onDataReceivedEvent");
+                    };
+                    uexBluetoothSerial.onConnectionSuccessEvent = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onConnectionSuccessEvent");
+                    };
+                    uexBluetoothSerial.onConnectionLostEvent = function(opId, dataType, data) {
+                        callbacklog(opId, dataType, data, "onConnectionLostEvent");
+                    };
+             //   }
+            });
+
+            function callbacklog(opId, dataType, data, callfuncname) {
+                var tmp = callfuncname + "\r\n";
+                tmp += "opId:" + opId + "\r\n";
+                tmp += "dataType:" + dataType + "\r\n";
+                tmp += "data:" + data + "\r\n";
+                alert(tmp);
+            }
+
+            function test_listDevices() {
+                alert("begin test_listDevices");
+                uexBluetoothSerial.listDevices();
+            }
+
+            function test_connect() {
+                alert("begin test_connect");
+                if (devices.length > 0) {
+                    var dev = devices[0];
+                    alert("address:" + dev.address);
+                    uexBluetoothSerial.connect(dev.address);
+                }
+            }
+
+            function test_connectInsecure() {
+                alert("begin test_connectInsecure");
+                if (devices.length > 0) {
+                    var dev = devices[0];
+                    uexBluetoothSerial.connectInsecure(dev.address);
+                }
+            }
+
+            function test_writeString() {
+                console.log("begin test_writeString");
+                uexBluetoothSerial.writeString("hello bluetooth");
+            }
+            
+            function test_writeHexString() {
+                console.log("begin test_writeHexString");
+                uexBluetoothSerial.writeHexString("aadd5f0000000001");
+            }
+            
+            function test_writeHexJson() {
+                console.log("begin test_writeHexJson");
+                uexBluetoothSerial.writeHexJson("[0x68,0x12,0x34]");
+            }
+            
+            function test_readBytes() {
+                console.log("begin test_readBytes");
+                uexBluetoothSerial.readBytes(3,3000,"true");
+            }
+            
+            function test_isEnabled() {
+                console.log("begin test_isEnabled");
+                uexBluetoothSerial.isEnabled();
+            }
+            
+            function test_isConnected() {
+                console.log("begin test_isConnected");
+                uexBluetoothSerial.isConnected();
+            }
+
+            function test_EnableReceiveEvent() {
+                console.log("begin test_EnableReceiveEvent");
+                uexBluetoothSerial.EnableReceiveEvent();
+            }
+
+            function test_DisableReceiveEvent() {
+                console.log("begin test_DisableReceiveEvent");
+                uexBluetoothSerial.DisableReceiveEvent();
+            }
+
+            function test_disconnect() {
+                console.log("begin test_disconnect");
+                uexBluetoothSerial.disconnect();
+            }
+            
+            function test_CRC16() {
+                var data = new Array();
+                data.push(0x68);
+                data.push(0x12);
+                data.push(0x34);
+                data.push(0x56);
+                var result = Utility.CRC16(data);
+                console.log("crc16 result="+result.toString(16));
+            }
+
+        </script>
+</html>
